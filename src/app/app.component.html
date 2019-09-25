@@ -1,1 +1,4 @@
-<app-start></app-start>
+<!-- <button (click)="startAgain()">start again</button> -->
+
+<button *ngIf="!play" mat-flat-button (click)="playGame()" routerLink="/welcome" routerLinkActive="active" color="accent">Play</button>
+<router-outlet></router-outlet>

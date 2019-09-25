@@ -48,7 +48,7 @@ export class StartComponent implements OnInit {
       this.inventory.weapons.push(weapon as string);
     }
     this.chooseWeaponMode = false;
-    this.itemService.setItems(this.inventory);
+    this.itemService.setInventory(this.inventory);
     this.displayMode = true;
   }
 

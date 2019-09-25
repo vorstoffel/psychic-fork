@@ -1,33 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule, MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
 import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
+import { Level1Component } from './levels/level1/level1.component';
+
+const appRoutes: Routes = [
+  { path: 'welcome', component: StartComponent },
+  { path: 'level1', component: Level1Component }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
-    InventoryBarComponent
+    InventoryBarComponent,
+    Level1Component
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatIconModule,
-    MatGridListModule,
     MatDividerModule,
     MatButtonModule,
     CommonModule,
@@ -35,7 +39,8 @@ import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatChipsModule
+    MatChipsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
