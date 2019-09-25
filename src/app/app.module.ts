@@ -14,11 +14,13 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
+import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartComponent
+    StartComponent,
+    InventoryBarComponent
   ],
   imports: [
     BrowserModule,

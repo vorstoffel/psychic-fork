@@ -48,10 +48,11 @@ export class StartComponent implements OnInit {
       this.inventory.weapons.push(weapon as string);
     }
     this.chooseWeaponMode = false;
+    this.itemService.setItems(this.inventory);
     this.displayMode = true;
   }
 
   goToLevel1() {
-    this.itemService.setItems(this.inventory);
+    // TODO: Routing to Level 1
   }
 }

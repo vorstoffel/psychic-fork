@@ -13,6 +13,14 @@ export class InventoryService {
 
   constructor() {}
 
+  getName(): string {
+    return JSON.parse(this.adventureStorage.getItem('inventory')).name;
+  }
+
+  getWeapons(): string[] {
+    return JSON.parse(this.adventureStorage.getItem('inventory')).weapons;
+  }
+
    getItems(): Inventory {
      return JSON.parse(this.adventureStorage.getItem('inventory'));
    }

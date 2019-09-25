@@ -1,4 +1,4 @@
-<h3>Your Adventure starts here</h3>
+<h3>Your Adventure Starts Here</h3>
 
 <ng-container *ngIf="nameMode">
   <mat-card class="display-flex">
@@ -52,12 +52,5 @@
 <ng-container *ngIf="displayMode" class="display-flex">
   <div class="wrapper"><span>{{inventory.name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
   <div class="wrapper"><button mat-flat-button color="accent" (click)="goToLevel1()">Go to Level 1</button></div>
-  <div class="wrapper">
-    <mat-chip-list>
-      <mat-chip *ngFor="let weapon of inventory.weapons">{{weapon}}</mat-chip>
-    </mat-chip-list>
-  </div>
+  <app-inventory-bar></app-inventory-bar>
 </ng-container>
-
-<!--TODO: choose 3 weapons, save into items service and get them from there in next level
-TODO2: new level1.html routing & navigation-->
