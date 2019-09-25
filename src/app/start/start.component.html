@@ -18,7 +18,7 @@
 </ng-container>
 
 <ng-container *ngIf="chooseWeaponMode">
-  <span>Welcome {{name}}! Which weapons would you like to take with you?</span>
+  <span>Welcome {{inventory.name}}! Which weapons would you like to take with you?</span>
   <mat-card class="display-flex">
     <form (ngSubmit)="onSubmitWeapon()" [formGroup]="weaponForm">
       <div>
@@ -50,11 +50,11 @@
 </ng-container>
 
 <ng-container *ngIf="displayMode" class="display-flex">
-  <div class="wrapper"><span>{{name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
+  <div class="wrapper"><span>{{inventory.name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
   <div class="wrapper"><button mat-flat-button color="accent" (click)="goToLevel1()">Go to Level 1</button></div>
   <div class="wrapper">
     <mat-chip-list>
-      <mat-chip *ngFor="let weapon of weapons">{{weapon}}</mat-chip>
+      <mat-chip *ngFor="let weapon of inventory.weapons">{{weapon}}</mat-chip>
     </mat-chip-list>
   </div>
 </ng-container>

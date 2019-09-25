@@ -9,7 +9,7 @@ import { Inventory,  InventoryService } from '../inventory.service';
 })
 export class StartComponent implements OnInit {
 
-  private inventory: Inventory = {
+  inventory: Inventory = {
     name: '',
     weapons: []
   };
