@@ -1,0 +1,15 @@
+.display-flex {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.button-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.wrapper {
+  margin-bottom: 1em;
+}

@@ -1,0 +1,63 @@
+<h3>Your Adventure starts here</h3>
+
+<ng-container *ngIf="nameMode">
+  <mat-card class="display-flex">
+    <form>
+      <div>
+        <mat-form-field>
+          <input type="string" matInput [formControl]="nameControl">
+          <mat-hint>Enter your name</mat-hint>
+          <mat-error *ngIf="nameControl.invalid">{{nameErrorMessage}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="button-flex">
+        <button mat-button (click)="onSubmitName()" color="primary" [disabled]="!nameControl.valid">SAVE</button>
+      </div>
+    </form>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="chooseWeaponMode">
+  <span>Welcome {{name}}! Which weapons would you like to take with you?</span>
+  <mat-card class="display-flex">
+    <form (ngSubmit)="onSubmitWeapon()" [formGroup]="weaponForm">
+      <div>
+        <mat-form-field>
+          <input type="string" matInput formControlName="firstWeapon">
+          <mat-hint>Enter a weapon</mat-hint>
+          <mat-error *ngIf="weaponForm.invalid">{{weaponErrorMessage}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input type="string" matInput formControlName="secondWeapon">
+          <mat-hint>Enter a weapon</mat-hint>
+          <mat-error *ngIf="weaponForm.invalid">{{weaponErrorMessage}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input type="string" matInput formControlName="thirdWeapon">
+          <mat-hint>Enter a weapon</mat-hint>
+          <mat-error *ngIf="weaponForm.invalid">{{weaponErrorMessage}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="button-flex">
+        <button mat-button type="submit" color="primary" [disabled]="!weaponForm.valid">SAVE</button>
+      </div>
+    </form>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="displayMode" class="display-flex">
+  <div class="wrapper"><span>{{name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
+  <div class="wrapper"><button mat-flat-button color="accent" (click)="goToLevel1()">Go to Level 1</button></div>
+  <div class="wrapper">
+    <mat-chip-list>
+      <mat-chip *ngFor="let weapon of weapons">{{weapon}}</mat-chip>
+    </mat-chip-list>
+  </div>
+</ng-container>
+
+<!--TODO: choose 3 weapons, save into items service and get them from there in next level
+TODO2: new level1.html routing & navigation-->
