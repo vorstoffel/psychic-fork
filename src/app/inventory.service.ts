@@ -10,17 +10,14 @@ export interface Inventory {
 })
 export class InventoryService {
   adventureStorage = localStorage;
-  private items: Inventory;
 
   constructor() {}
 
-   getItems() {
+   getItems(): Inventory {
      return JSON.parse(this.adventureStorage.getItem('inventory'));
    }
 
-   setItems(name: string, weapons: string[]) {
-    this.items.name = name;
-    this.items.weapons = weapons;
-    this.adventureStorage.setItem('inventory', JSON.stringify(this.items));
+   setItems(items: Inventory) {
+    this.adventureStorage.setItem('inventory', JSON.stringify(items));
    }
 }
