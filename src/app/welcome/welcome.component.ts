@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Inventory,  InventoryService } from '../inventory.service';
 
 @Component({
-  selector: 'app-start',
-  templateUrl: './start.component.html',
-  styleUrls: ['./start.component.scss']
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.scss']
 })
-export class StartComponent implements OnInit {
+export class WelcomeComponent {
 
   inventory: Inventory = {
     name: '',
@@ -29,12 +29,6 @@ export class StartComponent implements OnInit {
     thirdWeapon: new FormControl('', Validators.required)
   });
   weaponErrorMessage = 'You need this weapon!';
-
-
-  constructor() {}
-
-  ngOnInit() {
-  }
 
   onSubmitName() {
     this.inventory.name = this.nameControl.value;

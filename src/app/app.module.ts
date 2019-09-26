@@ -12,21 +12,24 @@ import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { StartComponent } from './start/start.component';
+import { StartPlayComponent } from './start-play/start-play.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
 import { Level1Component } from './levels/level1/level1.component';
 
 const appRoutes: Routes = [
-  { path: 'welcome', component: StartComponent },
+  { path: '', component: StartPlayComponent },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'level1', component: Level1Component }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartComponent,
+    WelcomeComponent,
     InventoryBarComponent,
-    Level1Component
+    Level1Component,
+    StartPlayComponent
   ],
   imports: [
     BrowserModule,

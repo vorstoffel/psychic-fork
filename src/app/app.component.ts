@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { InventoryService } from './inventory.service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +7,4 @@ import { InventoryService } from './inventory.service';
 })
 export class AppComponent {
 
-  inventoryService = new InventoryService();
-  play = false;
-
-  constructor() {
-    /*
-    if (this.inventoryService.getName() != null) {
-      this.play = true;
-    }*/
-  }
-
-  startAgain() {
-    this.inventoryService.deleteInventory();
-  }
-
-  playGame() {
-      this.play = true;
-  }
 }
