@@ -5,7 +5,7 @@
     <form>
       <div>
         <mat-form-field>
-          <input type="string" matInput [formControl]="nameControl">
+          <input type="string" matInput [formControl]="nameControl" placeholder="{{InputFormName}}">
           <mat-hint>Enter your name</mat-hint>
           <mat-error *ngIf="nameControl.invalid">{{nameErrorMessage}}</mat-error>
         </mat-form-field>
@@ -47,11 +47,12 @@
       </div>
     </form>
   </mat-card>
-  <span><br>Hint 38: Don't take a fork, it will not help you.</span>
+  <span><br>Hint 38: Don't take a fork, it will{{hint38}}</span>
 </ng-container>
 
 <ng-container *ngIf="displayMode" class="display-flex">
   <div class="wrapper"><span>{{inventory.name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
   <div class="wrapper"><button mat-flat-button color="accent" (click)="goToLevel1()" routerLink="/level1" routerLinkActive="active" >Go to Level 1</button></div>
   <app-inventory-bar></app-inventory-bar>
+  <span><br>Hint 2: There are no short cuts!</span>
 </ng-container>

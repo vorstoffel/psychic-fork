@@ -21,15 +21,15 @@ export class InventoryService {
     return JSON.parse(this.adventureStorage.getItem('inventory')).weapons;
   }
 
-   getInventory(): Inventory {
-     return JSON.parse(this.adventureStorage.getItem('inventory'));
-   }
+  getInventory(): Inventory {
+    return JSON.parse(this.adventureStorage.getItem('inventory'));
+  }
 
-   setInventory(items: Inventory) {
+  setInventory(items: Inventory) {
     this.adventureStorage.setItem('inventory', JSON.stringify(items));
-   }
+  }
 
-   deleteInventory() {
-     this.adventureStorage.clear();
-   }
+  deleteInventory() {
+    this.adventureStorage.clear();
+  }
 }

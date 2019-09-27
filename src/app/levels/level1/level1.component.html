@@ -1,16 +1,4 @@
-<div *ngIf="!inventory">
-  <div>
-    <span>Oh, it seems like your backpack is empty... You should choose a few things to take with you!</span><br><br>
-  </div>
-  <div>
-    <button mat-flat-button routerLink="/" routerLinkActive="active">Go Back</button>
-  </div>
-  <div>
-    <span><br>Hint -1: You never now what you will need in future events!</span>
-  </div>
-</div>
-
-<div *ngIf="inventory">
+<div>
   <span>You walk along in the forest of the Untersberg mountain happily. Suddenly, while you walk along a small, but fast
     flowing, clear river.. a wild oger appers!<br>What will you do?</span><br>
   <button mat-button (click)="attack()">Attack the oger</button>

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>What are you doing?</h1>
+
+<div mat-dialog-content>
+  <div>
+    <span>Oh, it seems like your backpack is empty... You should choose a few things to take with you!</span><br><br>
+  </div>
+
+  <div class="button-flex-left">
+    <button mat-flat-button [mat-dialog-close]="true" (click)="onCheckedBox()">Go Back</button>
+  </div>
+</div>
+<br>
+<div>
+  <mat-checkbox [(ngModel)]="checkedBox">Don't touch me!</mat-checkbox>
+</div>
+<div>
+  <span *ngIf="checkedBox">y u so mean? :(</span>
+</div>
+<mat-divider></mat-divider>
+<span><br>Hint -1: You never now what you will need in future events, but a fork is the exception.</span>
