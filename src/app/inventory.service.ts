@@ -9,9 +9,31 @@ export interface Inventory {
   providedIn: 'root'
 })
 export class InventoryService {
+ 
   adventureStorage = localStorage;
+  weaponsMock: string[] = [''];
 
-  constructor() {}
+  setName(name: string): void {
+    this.adventureStorage.setItem('inventory', JSON.stringify({
+      name,
+      weapons: this.weaponsMock
+    }));
+  }
+
+  setWeapons(weapons: string[]): void {
+    this.adventureStorage.setItem('inventory', JSON.stringify({
+      name: this.getName(),
+      weapons: weapons.filter(weapon => weapon.toUpperCase())
+    }));
+  }
+
+  setInventory(name: string, newWeapons: string[]): void {
+    const weapons = newWeapons.map(weapon => weapon.toUpperCase())
+    this.adventureStorage.setItem('inventory', JSON.stringify({
+      name,
+      weapons
+    }));
+  }
 
   getName(): string {
     return JSON.parse(this.adventureStorage.getItem('inventory')).name;
@@ -25,11 +47,16 @@ export class InventoryService {
     return JSON.parse(this.adventureStorage.getItem('inventory'));
   }
 
-  setInventory(items: Inventory) {
-    this.adventureStorage.setItem('inventory', JSON.stringify(items));
+  containsFork(): boolean {
+    return this.getWeapons().includes('FORK');
   }
 
-  deleteInventory() {
+  deleteWeapon(toBeDeletedWeapon: string): void {
+    const filteredWeapons = this.getWeapons().filter(weapon => weapon !== toBeDeletedWeapon.toUpperCase())
+    this.adventureStorage.setInventory(this.getName(), filteredWeapons);
+  }
+
+  deleteInventory(): void {
     this.adventureStorage.clear();
   }
 }
