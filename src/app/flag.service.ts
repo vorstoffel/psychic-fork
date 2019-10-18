@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
-export interface Flags {
-  meanie: boolean;
+export class Flags {
+  meanie: boolean = false;
+  breadCrumbs: boolean = false;
 }
 
 @Injectable({
@@ -17,6 +18,10 @@ export class FlagService {
   }
 
   getMeanie(): boolean {
-    return JSON.parse(this.flagStorage.getItem('flags')).meanie;
+    if (JSON.parse(this.flagStorage.getItem('flags')).meanie == undefined) {
+      return false;
+    } else {
+      return JSON.parse(this.flagStorage.getItem('flags')).meanie;
+    }
   }
 }
