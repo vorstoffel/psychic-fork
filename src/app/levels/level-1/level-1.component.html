@@ -1,18 +1,30 @@
-<ng-container *ngIf="walkingPeacefullyMode && !greet">
-  <span>You walk over the plärrer happily. Suddenly, while you walk along the noisy road.. a wild pigeon appears!<br>What
-    will you do?</span><br>
-  <button mat-button (click)="equipAWeapon()">Equip a Weapon (just in case)</button>
-  <button mat-button (click)="giveBreadCrumbs()">Give Bread Crumbs</button>
-  <app-inventory-bar></app-inventory-bar>
-</ng-container>
-
-<ng-container *ngIf="!walkingPeacefullyMode && !greet">
-  <span>The pigeon comes running at you with spreaded wings!</span><br>
-    <button mat-button (click)="attack()">Attack</button>
-    <button mat-button (click)="giveBreadCrumbs()">Say hi</button>
+<div class="wrapper">
+  <ng-container *ngIf="walkingPeacefullyMode && !greet">
+    <div class="wrapper">
+      <span>Suddenly, while you walk along a very noisy road cramped with cars.. a wild pigeon
+        appears!<br>What will you do?</span>
+    </div>
+    <div class="wrapper">
+      <button mat-button (click)="equipAWeapon()">Equip a Weapon (just in case)</button>
+      <button mat-button (click)="giveBreadCrumbs()">Give Bread Crumbs</button>
+    </div>
     <app-inventory-bar></app-inventory-bar>
-</ng-container>
+  </ng-container>
 
-<ng-container *ngIf="breadCrumbs">
-  <span>The pigeon comes running at you with spreaded wings!</span><br>
-</ng-container>
+  <ng-container *ngIf="!walkingPeacefullyMode && !greet">
+    <div class="wrapper">
+      <span>The pigeon comes running at you with spreaded wings!</span>
+    </div>
+    <div class="wrapper">
+      <button mat-button (click)="attack()">Attack</button>
+      <button mat-button (click)="giveBreadCrumbs()">Say hi</button>
+    </div>
+    <app-inventory-bar></app-inventory-bar>
+  </ng-container>
+
+  <ng-container *ngIf="breadCrumbs">
+    <div class="wrapper">
+      <span>The pigeon comes running at you with spreaded wings!</span>
+    </div>
+  </ng-container>
+</div>
