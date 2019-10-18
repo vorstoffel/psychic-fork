@@ -17,13 +17,15 @@ import { AppComponent } from './app.component';
 import { StartPlayComponent } from './start-play/start-play.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
-import { Level1Component } from './levels/level-1/level-1.component';
 import { EmptyInventoryDialogComponent } from './empty-inventory-dialog/empty-inventory-dialog.component';
+import { Level1Component } from './levels/level-1/level-1.component';
+import { Level2Component } from './levels/level2/level2.component';
 
 const appRoutes: Routes = [
   { path: '', component: StartPlayComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'level1', component: Level1Component }
+  { path: 'level1', component: Level1Component },
+  { path: 'level2', component: Level2Component },
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     InventoryBarComponent,
     Level1Component,
     StartPlayComponent,
-    EmptyInventoryDialogComponent
+    EmptyInventoryDialogComponent,
+    Level2Component
   ],
   imports: [
     BrowserModule,
