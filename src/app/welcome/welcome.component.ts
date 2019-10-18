@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InventoryService } from '../inventory.service';
+import { FlagService } from'../flag.service';
 
 @Component({
   selector: 'app-welcome',
@@ -9,10 +10,10 @@ import { InventoryService } from '../inventory.service';
 })
 export class WelcomeComponent implements OnInit {
   inventoryService = new InventoryService();
+  flagService = new FlagService();
 
   InputFormName = 'hello nice c:';
   hint38 = ' not help you.';
-  meanieFlag = localStorage;
 
   name = '';
   nameMode = true;
@@ -31,7 +32,7 @@ export class WelcomeComponent implements OnInit {
   weaponErrorMessage = 'You need this weapon!';
 
   ngOnInit() {
-    if (this.meanieFlag.getItem('meanie') === '1') {
+    if (this.flagService.getMeanie() === true) {
       this.InputFormName = 'meanie >:(';
       this.hint38 = '... \' >:( you don\'t need this hint, right? Figure out yourself what its about with the fork!';
     }
@@ -52,9 +53,5 @@ export class WelcomeComponent implements OnInit {
     this.chooseWeaponMode = false;
     this.inventoryService.setWeapons(weapons);
     this.displayMode = true;
-  }
-
-  goToLevel1() {
-    // TODO: Routing to Level 1
   }
 }

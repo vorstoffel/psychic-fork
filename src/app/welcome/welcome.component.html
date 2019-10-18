@@ -52,7 +52,7 @@
 
 <ng-container *ngIf="displayMode" class="display-flex">
   <div class="wrapper"><span>{{name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
-  <div class="wrapper"><button mat-flat-button color="accent" (click)="goToLevel1()" routerLink="/level1" routerLinkActive="active" >Go to Level 1</button></div>
+  <div class="wrapper"><button mat-flat-button color="accent" routerLink="/level1" routerLinkActive="active" >Go to Level 1</button></div>
   <app-inventory-bar></app-inventory-bar>
   <span><br>Hint 2: There are no short cuts!</span>
 </ng-container>

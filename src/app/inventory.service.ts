@@ -5,18 +5,26 @@ export interface Inventory {
   weapons: string[];
 }
 
+export class MockInventory implements Inventory {
+  name: 'mock';
+  weapons: ['', '', ''];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryService {
- 
   adventureStorage = localStorage;
-  weaponsMock: string[] = [''];
+  mockInventory: Inventory = new MockInventory;
 
   setName(name: string): void {
+    // let weapons = this.mockInventory.weapons;
+    // if (this.getWeapons() != undefined) {
+    //   weapons = this.getWeapons();
+    // }
     this.adventureStorage.setItem('inventory', JSON.stringify({
       name,
-      weapons: this.weaponsMock
+      weapons: this.mockInventory.weapons,
     }));
   }
 
@@ -28,19 +36,19 @@ export class InventoryService {
   }
 
   setInventory(name: string, newWeapons: string[]): void {
-    const weapons = newWeapons.map(weapon => weapon.toUpperCase())
+    const weapons = newWeapons.map(weapon => weapon.toUpperCase());
     this.adventureStorage.setItem('inventory', JSON.stringify({
       name,
-      weapons
+      weapons,
     }));
   }
 
   getName(): string {
-    return JSON.parse(this.adventureStorage.getItem('inventory')).name;
+    return this.getInventory().name;
   }
 
   getWeapons(): string[] {
-    return JSON.parse(this.adventureStorage.getItem('inventory')).weapons;
+    return this.getInventory().weapons;
   }
 
   getInventory(): Inventory {
@@ -52,7 +60,7 @@ export class InventoryService {
   }
 
   deleteWeapon(toBeDeletedWeapon: string): void {
-    const filteredWeapons = this.getWeapons().filter(weapon => weapon !== toBeDeletedWeapon.toUpperCase())
+    const filteredWeapons = this.getWeapons().filter(weapon => weapon !== toBeDeletedWeapon.toUpperCase());
     this.adventureStorage.setInventory(this.getName(), filteredWeapons);
   }
 

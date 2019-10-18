@@ -6,12 +6,12 @@
   </div>
 
   <div class="button-flex-left">
-    <button mat-flat-button [mat-dialog-close]="true" (click)="onCheckedBox()">Go Back</button>
+    <button mat-flat-button [mat-dialog-close]="true" (click)="onCloseDialog()">Go Back</button>
   </div>
 </div>
 <br>
 <div>
-  <mat-checkbox [(ngModel)]="checkedBox">Don't touch me!</mat-checkbox>
+  <mat-checkbox (click)="checkedBox()">Don't touch me!</mat-checkbox>
 </div>
 <div>
   <span *ngIf="checkedBox">y u so mean? :(</span>

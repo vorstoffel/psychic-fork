@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../start-play/start-play.component';
+import { FlagService } from '../flag.service';
 
 @Component({
   selector: 'app-empty-inventory-dialog',
@@ -8,15 +9,18 @@ import { DialogData } from '../start-play/start-play.component';
   styleUrls: ['./empty-inventory-dialog.component.scss']
 })
 export class EmptyInventoryDialogComponent {
-  checkedBox = false;
+  isCheckedBox = false;
+  flagService = new FlagService;
 
-  meanieFlag = localStorage;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  checkedBox() {
+    this.isCheckedBox = true;
+  }
 
-  onCheckedBox() {
-    if (this.checkedBox === true) {
-      this.meanieFlag.setItem('meanie', '1');
+  onCloseDialog() {
+    if (this.isCheckedBox) {
+      this.flagService.setMeanie();
     }
   }
 }
