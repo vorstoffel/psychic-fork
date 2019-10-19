@@ -19,8 +19,6 @@ export class EmptyInventoryDialogComponent {
   }
 
   onCloseDialog() {
-    if (this.isCheckedBox) {
-      this.flagService.setMeanie();
-    }
+    this.flagService.setMeanie(this.isCheckedBox);
   }
 }

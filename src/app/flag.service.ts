@@ -11,9 +11,9 @@ export class Flags {
 export class FlagService {
   flagStorage = localStorage;
 
-  setMeanie(): void {
+  setMeanie(flag: boolean): void {
     this.flagStorage.setItem('flags', JSON.stringify({
-      meanie: true,
+      meanie: flag,
     }));
   }
 
