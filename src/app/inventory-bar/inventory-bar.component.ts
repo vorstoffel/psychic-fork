@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Inventory,  InventoryService } from '../inventory.service';
+import { InventoryService } from '../inventory.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inventory-bar',
   templateUrl: './inventory-bar.component.html',
   styleUrls: ['./inventory-bar.component.scss']
 })
-export class InventoryBarComponent implements OnInit {
+export class InventoryBarComponent {
 
   inventoryService = new InventoryService();
-  weapons: string[] = [];
+  weapons: Observable<string[]>;
 
-  constructor() {}
-
-  // TODO: Update on change
-
-  ngOnInit() {
+  constructor() {
     this.weapons = this.inventoryService.getWeapons();
   }
-
 }

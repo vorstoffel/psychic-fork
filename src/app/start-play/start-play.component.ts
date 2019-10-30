@@ -22,7 +22,7 @@ export class StartPlayComponent {
     itemService: InventoryService,
     public emptyInventoryDialog: MatDialog
   ) {
-    if (itemService.getInventory() != null) {
+    if (itemService.getInventory()) {
       this.inventory = true;
     }
   }
