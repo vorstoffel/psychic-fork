@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, ReplaySubject } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
 export interface Inventory {
   name: string;
-  weapons: string[];
+  weapons: Items[];
 }
 
-export class MockInventory implements Inventory {
-  name: null;
-  weapons: ['FORK', 'FORK', 'FORK'];
+export interface Items {
+  name: string;
+  isWeapon: boolean;
+  equiped: boolean;
+  broken: boolean;
 }
 
 const INVENTORY = 'inventory';
@@ -20,37 +22,37 @@ const FORK = 'FORK';
 })
 export class InventoryService {
   private adventureStorage = localStorage;
-  private mockInventory: Inventory = new MockInventory;
-  private Inventory$ = new BehaviorSubject<Inventory>(null);
+  private Inventory$ = new ReplaySubject<Inventory>();
 
   constructor() {
     if (this.adventureStorage.getItem(INVENTORY)) {
       const inventoryLocalStorage = JSON.parse(this.adventureStorage.getItem(INVENTORY))
-      this.Inventory$ = new BehaviorSubject<Inventory>(inventoryLocalStorage);
-    } else {
-      this.Inventory$ = new BehaviorSubject<Inventory>(this.mockInventory);
+      this.Inventory$.next(inventoryLocalStorage);
     }
   }
+
+  // *** create objects ***
 
   createInventoryObject(name: string, weapons: string[]): Inventory {
     return {
       name,
-      weapons: weapons.map(weapon => weapon.toUpperCase())
+      weapons: weapons.map(weapon => this.createItemObject(weapon, true))
     }
   }
 
-  setWeapons(weapons: string[]): void {
-    let name = () => {
-      if (this.adventureStorage.getItem(INVENTORY)) {
-        return JSON.parse(this.adventureStorage.getItem(INVENTORY)).name;
-      } else {
-        return this.mockInventory.name;
-      }
-    };
+  createItemObject(name: string, isWeapon: boolean) {
+    return {
+      name: name.toUpperCase(),
+      isWeapon,
+      equiped: false,
+      broken: false
+    }
+  }
 
-    const newInventory = this.createInventoryObject(name(), weapons);
-    this.Inventory$.next(newInventory);
-    this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
+  // *** Setter *** 
+
+  addItem(name: string, isWeapon: boolean){
+    // TODO: add one item to the items[] in Inventory$ and save it to adventureStorage
   }
 
   setInventory(name: string, weapons: string[]): void {
@@ -59,13 +61,15 @@ export class InventoryService {
     this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
   }
 
+  // *** Getter ***
+
   getName(): Observable<string> {
     return this.Inventory$.pipe(
       map(inventory => inventory.name)
     );
   }
 
-  getWeapons(): Observable<string[]> {
+  getItems(): Observable<Items[]> {
     return this.Inventory$.pipe(
       map(inventory => inventory.weapons)
     );
@@ -84,20 +88,20 @@ export class InventoryService {
     }
   }
 
-  containsFork(): Observable<boolean> {
-    return this.getWeapons().pipe(
-      map(weapons => weapons.indexOf(FORK) !== -1)
+  contains(name: string): Observable<boolean> {
+    return this.getItems().pipe(
+      map(items => items.findIndex((item) => item.name === name) !== -1)
     );
   }
-  
+
   // this.Inventory$.value; 
   // returns currently stored object in BehaviourSubject
 
-  deleteWeapon(toBeDeletedWeapon: string): void {
-    const filteredWeapons = this.getWeapons().pipe(
-      // filter(weapon => weapon !== toBeDeletedWeapon.toUpperCase())
-      // TODO 
+  deleteItem(toBeDeletedItem: string): void {
+    const filteredWeapons = this.getItems().pipe(
+      map(items => items.filter(item => item.name !== toBeDeletedItem))
     );
+
     this.adventureStorage.setInventory(this.getName(), filteredWeapons);
   }
 
