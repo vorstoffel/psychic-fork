@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { InventoryService } from '../inventory.service';
+import { InventoryService, Weapon } from '../inventory.service';
 import { FlagService } from'../flag.service';
 
 @Component({
@@ -47,12 +47,16 @@ export class WelcomeComponent implements OnInit {
   }
 
   onSubmitWeapon() {
-    let weapons = []; // model values go into the weapons string[]
-    for (const weapon of Object.values(this.weaponForm.value)) {
-      weapons.push(weapon as string);
+    let weapons: Weapon[] = [];
+
+    for (const stringWeapon of Object.values(this.weaponForm.value)) {
+      let weaponWeapon = this.inventoryService.createWeaponObject(stringWeapon as string, 1)
+      weapons.push(weaponWeapon);
     }
-    this.chooseWeaponMode = false;
+
     this.inventoryService.setInventory(this.name, weapons);
+
+    this.chooseWeaponMode = false;
     this.displayMode = true;
   }
 }

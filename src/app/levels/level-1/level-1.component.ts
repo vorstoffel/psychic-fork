@@ -22,7 +22,7 @@ export class Level1Component {
     // equip item from inventory.service
     // show message "you grabbed <item>"
     // (what if fork is chosen?)
-    // start countdown to oger attack
+    // start countdown to pigeon attack
   }
 
   attack() {

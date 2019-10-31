@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface Inventory {
   name: string;
-  weapons: Items[];
+  weapons: Weapon[];
+  items?: string[];
 }
 
-export interface Items {
+export interface Weapon {
   name: string;
-  isWeapon: boolean;
+  strength: number;
   equiped: boolean;
   broken: boolean;
 }
 
 const INVENTORY = 'inventory';
-const FORK = 'FORK';
 
 @Injectable({
   providedIn: 'root'
@@ -33,17 +33,17 @@ export class InventoryService {
 
   // *** create objects ***
 
-  createInventoryObject(name: string, weapons: string[]): Inventory {
+  createInventoryObject(name: string, weapons: Weapon[]): Inventory {
     return {
       name,
-      weapons: weapons.map(weapon => this.createItemObject(weapon, true))
+      weapons
     }
   }
 
-  createItemObject(name: string, isWeapon: boolean) {
+  public createWeaponObject(name: string, strength: number): Weapon {
     return {
       name: name.toUpperCase(),
-      isWeapon,
+      strength,
       equiped: false,
       broken: false
     }
@@ -51,11 +51,15 @@ export class InventoryService {
 
   // *** Setter *** 
 
-  addItem(name: string, isWeapon: boolean){
+  addWeapon(name: string, strength: number) {
+    // TODO: add weapon to weapon[] in inventory and save it to adventureStorage
+  }
+
+  addItem(name: string) {
     // TODO: add one item to the items[] in Inventory$ and save it to adventureStorage
   }
 
-  setInventory(name: string, weapons: string[]): void {
+  setInventory(name: string, weapons: Weapon[]): void {
     const newInventory = this.createInventoryObject(name, weapons);
     this.Inventory$.next(newInventory);
     this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
@@ -69,7 +73,7 @@ export class InventoryService {
     );
   }
 
-  getItems(): Observable<Items[]> {
+  getItems(): Observable<Weapon[]> {
     return this.Inventory$.pipe(
       map(inventory => inventory.weapons)
     );
@@ -102,6 +106,8 @@ export class InventoryService {
       map(items => items.filter(item => item.name !== toBeDeletedItem))
     );
 
+    // TODO
+    console.log('deleteItem(toBeDeletedItem: string) in inventory.service')
     this.adventureStorage.setInventory(this.getName(), filteredWeapons);
   }
 

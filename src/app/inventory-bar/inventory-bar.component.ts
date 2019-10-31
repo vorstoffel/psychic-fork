@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryService, Items } from '../inventory.service';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { InventoryService, Weapon } from '../inventory.service';
+import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 
@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class InventoryBarComponent implements OnInit {
 
-  weapons = new ReplaySubject<Items[]>();
+  weapons = new ReplaySubject<Weapon[]>();
   componentWillBeDestroyed = new Subject();
 
   constructor(
