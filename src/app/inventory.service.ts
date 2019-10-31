@@ -3,7 +3,6 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Inventory {
-  name: string;
   weapons: Weapon[];
   items?: string[];
 }
@@ -33,10 +32,9 @@ export class InventoryService {
 
   // *** create objects ***
 
-  createInventoryObject(name: string, weapons: Weapon[]): Inventory {
+  createInventoryObject(weapons: Weapon[], items?: string[]): Inventory {
     return {
-      name,
-      weapons
+      weapons,
     }
   }
 
@@ -51,6 +49,13 @@ export class InventoryService {
 
   // *** Setter *** 
 
+  equipWeapon(): string {
+    //this.setInventory() .....
+    // take first weapon, set equiped = true and save to adventureStorage and Inventory$
+    // if first weapon is fork?
+    return 'weapon-mock'
+  }
+
   addWeapon(name: string, strength: number) {
     // TODO: add weapon to weapon[] in inventory and save it to adventureStorage
   }
@@ -59,19 +64,15 @@ export class InventoryService {
     // TODO: add one item to the items[] in Inventory$ and save it to adventureStorage
   }
 
-  setInventory(name: string, weapons: Weapon[]): void {
-    const newInventory = this.createInventoryObject(name, weapons);
+  setInventory(weapons: Weapon[]): void {
+    const newInventory = this.createInventoryObject(weapons);
     this.Inventory$.next(newInventory);
     this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
   }
 
   // *** Getter ***
 
-  getName(): Observable<string> {
-    return this.Inventory$.pipe(
-      map(inventory => inventory.name)
-    );
-  }
+
 
   getItems(): Observable<Weapon[]> {
     return this.Inventory$.pipe(
@@ -108,7 +109,7 @@ export class InventoryService {
 
     // TODO
     console.log('deleteItem(toBeDeletedItem: string) in inventory.service')
-    this.adventureStorage.setInventory(this.getName(), filteredWeapons);
+    this.adventureStorage.setInventory(filteredWeapons);
   }
 
   deleteInventory(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InventoryService, Weapon } from '../inventory.service';
 import { FlagService } from'../flag.service';
+import { AvatarService } from '../avatar.service';
 
 @Component({
   selector: 'app-welcome',
@@ -21,6 +22,7 @@ export class WelcomeComponent implements OnInit {
   nameErrorMessage = 'Tell me your name!';
 
   constructor(
+    private avatarService: AvatarService,
     private flagService: FlagService,
     private inventoryService: InventoryService,
   ){}
@@ -42,6 +44,7 @@ export class WelcomeComponent implements OnInit {
 
   onSubmitName() {
     this.name = this.nameControl.value;
+    this.avatarService.setName(this.name);
     this.nameMode = false;
     this.chooseWeaponMode = true;
   }
@@ -54,7 +57,7 @@ export class WelcomeComponent implements OnInit {
       weapons.push(weaponWeapon);
     }
 
-    this.inventoryService.setInventory(this.name, weapons);
+    this.inventoryService.setInventory(weapons);
 
     this.chooseWeaponMode = false;
     this.displayMode = true;
