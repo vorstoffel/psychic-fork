@@ -35,7 +35,7 @@ export class InventoryService {
   createInventoryObject(name: string, weapons: string[]): Inventory {
     return {
       name,
-      weapons: weapons.filter(weapon => weapon.toUpperCase())
+      weapons: weapons.map(weapon => weapon.toUpperCase())
     }
   }
 
