@@ -15,26 +15,20 @@ export interface DialogData {
 })
 export class StartPlayComponent {
 
-  inventory = false;
 
   constructor(
     private router: Router,
-    itemService: InventoryService,
-    public emptyInventoryDialog: MatDialog
-  ) {
-    if (itemService.getInventory()) {
-      this.inventory = true;
-    }
-  }
+    public emptyInventoryDialog: MatDialog,
+    private inventoryService: InventoryService
+  ) { }
 
   playGame() {
-    if (this.inventory == false) {
-      this.emptyInventoryDialog.open(EmptyInventoryDialogComponent, {
-        data: {error: 'emptyInventory'}
-      });
-    } else {
+    if (this.inventoryService.isInventorySet()) {
       this.router.navigate(['/level1']);
+    } else {
+      this.emptyInventoryDialog.open(EmptyInventoryDialogComponent, {
+        data: { error: 'emptyInventory' }
+      });
     }
   }
-
 }

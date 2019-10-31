@@ -18,10 +18,11 @@ export class FlagService {
   }
 
   getMeanie(): boolean {
-    if (JSON.parse(this.flagStorage.getItem('flags')).meanie == undefined) {
+    const flags = JSON.parse(this.flagStorage.getItem('flags'));
+    if (flags == undefined || flags.meanie == undefined) {
       return false;
     } else {
-      return JSON.parse(this.flagStorage.getItem('flags')).meanie;
+      return flags.meanie;
     }
   }
 }

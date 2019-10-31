@@ -9,9 +9,6 @@ import { FlagService } from'../flag.service';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  inventoryService = new InventoryService();
-  flagService = new FlagService();
-
   InputFormName = 'hello nice c:';
   hint38 = ' not help you.';
 
@@ -22,6 +19,11 @@ export class WelcomeComponent implements OnInit {
 
   nameControl = new FormControl('', Validators.required);
   nameErrorMessage = 'Tell me your name!';
+
+  constructor(
+    private flagService: FlagService,
+    private inventoryService: InventoryService,
+  ){}
 
   // gives back an object
   weaponForm = new FormGroup({
@@ -40,7 +42,6 @@ export class WelcomeComponent implements OnInit {
 
   onSubmitName() {
     this.name = this.nameControl.value;
-    this.inventoryService.setName(this.nameControl.value);
     this.nameMode = false;
     this.chooseWeaponMode = true;
   }
@@ -51,7 +52,7 @@ export class WelcomeComponent implements OnInit {
       weapons.push(weapon as string);
     }
     this.chooseWeaponMode = false;
-    this.inventoryService.setWeapons(weapons);
+    this.inventoryService.setInventory(this.name, weapons);
     this.displayMode = true;
   }
 }

@@ -8,7 +8,7 @@ export interface Inventory {
 }
 
 export class MockInventory implements Inventory {
-  name: 'mock';
+  name: null;
   weapons: ['FORK', 'FORK', 'FORK'];
 }
 
@@ -39,28 +39,23 @@ export class InventoryService {
     }
   }
 
-  setName(name: string): void {
-    let weapons = () => {
+  setWeapons(weapons: string[]): void {
+    let name = () => {
       if (this.adventureStorage.getItem(INVENTORY)) {
-        return JSON.parse(this.adventureStorage.getItem(INVENTORY)).weapons;
+        return JSON.parse(this.adventureStorage.getItem(INVENTORY)).name;
       } else {
-        return this.mockInventory.weapons;
+        return this.mockInventory.name;
       }
     };
 
-    const newInventory = this.createInventoryObject(name, weapons());
-    this.Inventory$.next(newInventory);
-    this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
-  }
-
-  setWeapons(weapons: string[]): void {
-    const newInventory = this.createInventoryObject(this.Inventory$.value.name, weapons);
+    const newInventory = this.createInventoryObject(name(), weapons);
     this.Inventory$.next(newInventory);
     this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
   }
 
   setInventory(name: string, weapons: string[]): void {
     const newInventory = this.createInventoryObject(name, weapons);
+    this.Inventory$.next(newInventory);
     this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
   }
 
@@ -80,11 +75,23 @@ export class InventoryService {
     return this.Inventory$;
   }
 
+  // is inventory initially set from user?
+  isInventorySet(): boolean {
+    if (this.adventureStorage.getItem(INVENTORY)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   containsFork(): Observable<boolean> {
     return this.getWeapons().pipe(
       map(weapons => weapons.indexOf(FORK) !== -1)
     );
   }
+  
+  // this.Inventory$.value; 
+  // returns currently stored object in BehaviourSubject
 
   deleteWeapon(toBeDeletedWeapon: string): void {
     const filteredWeapons = this.getWeapons().pipe(
@@ -93,23 +100,6 @@ export class InventoryService {
     );
     this.adventureStorage.setInventory(this.getName(), filteredWeapons);
   }
-
-  /*
-    // this.Inventory$.value; 
-    // derzeitiges gespeichertes Objekt im BehaviourSubject
-
-  async abcDoSomething(): Promise<void> {
-    const containsFork = await this.containsForkAsync();
-
-    if (containsFork) {
-
-    }
-  }
-
-  async containsForkAsync(): Promise<boolean> {
-    return this.containsFork().pipe(take(1)).toPromise();
-  }
-  */
 
   deleteInventory(): void {
     this.adventureStorage.clear();

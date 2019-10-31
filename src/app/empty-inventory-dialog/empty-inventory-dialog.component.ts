@@ -10,15 +10,19 @@ import { FlagService } from '../flag.service';
 })
 export class EmptyInventoryDialogComponent {
   isCheckedBox = false;
-  flagService = new FlagService;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private flagService: FlagService
+  ) { }
 
   checkedBox() {
     this.isCheckedBox = true;
   }
 
   onCloseDialog() {
-    this.flagService.setMeanie(this.isCheckedBox);
+    if (this.flagService.getMeanie() == false) {
+      this.flagService.setMeanie(this.isCheckedBox);
+    }
   }
 }
