@@ -11,14 +11,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import { StartPlayComponent } from './start-play/start-play.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
 import { EmptyInventoryDialogComponent } from './empty-inventory-dialog/empty-inventory-dialog.component';
-import { Level1Component } from './levels/level-1/level-1.component';
+import { Level1Component } from './levels/level1/leve1.component';
 import { Level2Component } from './levels/level2/level2.component';
 
 const appRoutes: Routes = [
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatDialogModule,
     FormsModule,
+    FlexLayoutModule,
     MatChipsModule,
     FormsModule,
     MatCheckboxModule,

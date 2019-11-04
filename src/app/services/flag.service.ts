@@ -4,6 +4,7 @@ export class Flags {
   meanie: boolean = false;
   breadCrumbs: boolean = false;
 }
+const FLAGS = 'flags';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,13 @@ export class FlagService {
   flagStorage = localStorage;
 
   setMeanie(flag: boolean): void {
-    this.flagStorage.setItem('flags', JSON.stringify({
+    this.flagStorage.setItem(FLAGS, JSON.stringify({
       meanie: flag,
     }));
   }
 
   getMeanie(): boolean {
-    const flags = JSON.parse(this.flagStorage.getItem('flags'));
+    const flags = JSON.parse(this.flagStorage.getItem(FLAGS));
     if (flags == undefined || flags.meanie == undefined) {
       return false;
     } else {

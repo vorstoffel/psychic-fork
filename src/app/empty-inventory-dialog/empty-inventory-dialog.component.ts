@@ -1,7 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../start-play/start-play.component';
-import { FlagService } from '../flag.service';
+import { Component } from '@angular/core';
+import { FlagService } from '../services/flag.service';
 
 @Component({
   selector: 'app-empty-inventory-dialog',
@@ -11,10 +9,7 @@ import { FlagService } from '../flag.service';
 export class EmptyInventoryDialogComponent {
   isCheckedBox = false;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private flagService: FlagService
-  ) { }
+  constructor(private flagService: FlagService) { }
 
   checkedBox() {
     this.isCheckedBox = true;

@@ -1,7 +1,6 @@
-<h3>Your Adventure Starts Here</h3>
+<div class="wrapper" fxLayout="column" fxLayoutAlign="center center">
 
-<ng-container *ngIf="nameMode">
-  <mat-card class="display-flex">
+  <ng-container *ngIf="nameMode">
     <form>
       <div>
         <mat-form-field>
@@ -10,16 +9,14 @@
           <mat-error *ngIf="nameControl.invalid">{{nameErrorMessage}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="button-flex">
+      <div fxLayoutAlign="end end">
         <button mat-button (click)="onSubmitName()" color="primary" [disabled]="!nameControl.valid">SAVE</button>
       </div>
     </form>
-  </mat-card>
-</ng-container>
+  </ng-container>
 
-<ng-container *ngIf="chooseWeaponMode">
-  <span>Welcome {{name}}! Which weapons would you like to take with you?</span>
-  <mat-card class="display-flex">
+  <ng-container *ngIf="chooseWeaponMode">
+    <span>Welcome {{name}}! Which weapons would you like to take with you?</span>
     <form (ngSubmit)="onSubmitWeapon()" [formGroup]="weaponForm">
       <div>
         <mat-form-field>
@@ -42,17 +39,22 @@
           <mat-error *ngIf="weaponForm.invalid">{{weaponErrorMessage}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="button-flex">
+      <div fxLayoutAlign="end end">
         <button mat-button type="submit" color="primary" [disabled]="!weaponForm.valid">SAVE</button>
       </div>
     </form>
-  </mat-card>
-  <span><br>Hint 38: Don't take a fork, it will{{hint38}}</span>
-</ng-container>
+    <div>Hint 38: Don't take a fork, it will{{hint38}}</div>
+  </ng-container>
 
-<ng-container *ngIf="displayMode" class="display-flex">
-  <div class="wrapper"><span>{{name}}, I would have chosen not quite this kind of weapons.. But, well, no going back now!</span></div>
-  <div class="wrapper"><button mat-flat-button color="accent" routerLink="/level1" routerLinkActive="active" >Go to Level 1</button></div>
-  <app-inventory-bar></app-inventory-bar>
-  <span><br>Hint 2: There are no short cuts!</span>
-</ng-container>
+  <ng-container *ngIf="displayMode">
+    <div fxLayout="column">
+      <div>
+        <span>{{name}}, your choice of weapons... well, no going back now!</span>
+      </div>
+      <div class="wrapper" fxLayoutAlign="end end">
+        <button mat-flat-button color="accent" routerLink="/level1" routerLinkActive="active">Go to Level 1</button>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

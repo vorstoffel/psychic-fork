@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { InventoryService } from 'src/app/inventory.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 import { EmptyInventoryDialogComponent } from '../empty-inventory-dialog/empty-inventory-dialog.component';
-
-export interface DialogData {
-  error: 'emptyInventory';
-}
+import { LevelService } from '../services/level.service';
 
 @Component({
   selector: 'app-start-play',
@@ -14,21 +11,21 @@ export interface DialogData {
   styleUrls: ['./start-play.component.scss']
 })
 export class StartPlayComponent {
-
+  startNewGameButton = false;
 
   constructor(
     private router: Router,
     public emptyInventoryDialog: MatDialog,
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
+    private levelService: LevelService,
   ) { }
 
   playGame() {
     if (this.inventoryService.isInventorySet()) {
-      this.router.navigate(['/level1']);
+      this.router.navigate([this.levelService.getLevel()]);
     } else {
-      this.emptyInventoryDialog.open(EmptyInventoryDialogComponent, {
-        data: { error: 'emptyInventory' }
-      });
+      this.emptyInventoryDialog.open(EmptyInventoryDialogComponent);
+      this.startNewGameButton = true;
     }
   }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { InventoryService, Weapon } from '../inventory.service';
-import { FlagService } from'../flag.service';
-import { AvatarService } from '../avatar.service';
+import { InventoryService, Weapon } from '../services//inventory.service';
+import { FlagService } from'../services//flag.service';
+import { AvatarService } from '../services//avatar.service';
 
 @Component({
   selector: 'app-welcome',
@@ -53,7 +53,7 @@ export class WelcomeComponent implements OnInit {
     let weapons: Weapon[] = [];
 
     for (const stringWeapon of Object.values(this.weaponForm.value)) {
-      let weaponWeapon = this.inventoryService.createWeaponObject(stringWeapon as string, 1)
+      let weaponWeapon = this.inventoryService.createNewWeaponObject(stringWeapon as string, 1)
       weapons.push(weaponWeapon);
     }
 

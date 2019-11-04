@@ -1,14 +1,15 @@
-<div class="wrapper">
+<div class="wrap-screen">
   <ng-container *ngIf="walkingPeacefullyMode && !greet">
     <div class="wrapper">
       <span>Suddenly, while you walk along a very noisy road cramped with cars.. a wild pigeon
         appears!<br>What will you do?</span>
     </div>
     <div class="wrapper">
-      <button mat-button (click)="equipAWeapon()">Equip a Weapon (just in case)</button>
-      <button mat-button (click)="giveBreadCrumbs()">Give Bread Crumbs</button>
+      <button mat-flat-button color="accent" (click)="equipAWeapon()">Equip a Weapon (just in case)</button>
     </div>
-    <app-inventory-bar></app-inventory-bar>
+    <div class="wrapper">
+      <button mat-flat-button color="accent" (click)="giveBreadCrumbs()">Give Bread Crumbs</button>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="!walkingPeacefullyMode && !greet">
@@ -16,10 +17,11 @@
       <span>The pigeon comes running at you with spreaded wings!</span>
     </div>
     <div class="wrapper">
-      <button mat-button (click)="attack()">Attack</button>
-      <button mat-button (click)="giveBreadCrumbs()">Say hi</button>
+      <button mat-flat-button color="accent" (click)="attack()">Attack</button>
     </div>
-    <app-inventory-bar></app-inventory-bar>
+    <div class="wrapper">
+      <button mat-flat-button color="accent" (click)="giveBreadCrumbs()">Say Hi</button>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="breadCrumbs">
@@ -28,3 +30,5 @@
     </div>
   </ng-container>
 </div>
+
+<app-inventory-bar></app-inventory-bar>

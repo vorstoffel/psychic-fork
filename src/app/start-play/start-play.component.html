@@ -1,10 +1,13 @@
-<div>
-  <button mat-flat-button routerLink="/welcome" routerLinkActive="active">Start New Game</button>
-</div>
-<div>
-  <button mat-flat-button color="primary" (click)="playGame()">Play</button>
-</div>
-<br>
-<div>
-<span>Hint 0: Save all your Level URLs.. or regret it later.</span>
+<div class="wrapper" fxLayout="column" fxLayoutAlign="space-around center">
+  <div class="wrapper">* PSYCHIC FORK I *</div>
+
+  <div class="wrapper">
+    <button mat-flat-button color="primary" (click)="playGame()">Play</button>
+  </div>
+
+  <div class="wrapper">
+    <ng-container *ngIf="startNewGameButton">
+      <button mat-flat-button color="accent" routerLink="/welcome" routerLinkActive="active">Pack Backpack</button>
+    </ng-container>
+  </div>
 </div>

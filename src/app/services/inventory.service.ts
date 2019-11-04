@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+// TODO: outsource in extra file
 export interface Inventory {
   weapons: Weapon[];
   items?: string[];
 }
 
+// TODO: outsource in extra file
 export interface Weapon {
   name: string;
   strength: number;
@@ -30,15 +32,31 @@ export class InventoryService {
     }
   }
 
+  // *** Getter ***
+  
+  isInventorySet(): boolean {
+    return this.adventureStorage.getItem(INVENTORY) ? true : false;
+  }
+
+  getItems(): Observable<Weapon[]> {
+    return this.Inventory$.pipe(
+      map(inventory => inventory.weapons)
+    );
+  }
+
+  getInventory(): Observable<Inventory> {
+    return this.Inventory$.asObservable();
+  }
+
   // *** create objects ***
 
-  createInventoryObject(weapons: Weapon[], items?: string[]): Inventory {
+  createNewInventoryObject(weapons: Weapon[], items?: string[]): Inventory {
     return {
       weapons,
     }
   }
 
-  public createWeaponObject(name: string, strength: number): Weapon {
+  public createNewWeaponObject(name: string, strength: number): Weapon {
     return {
       name: name.toUpperCase(),
       strength,
@@ -50,7 +68,8 @@ export class InventoryService {
   // *** Setter *** 
 
   equipWeapon(): string {
-    //this.setInventory() .....
+    // TODO:
+    // this.setInventory() .....
     // take first weapon, set equiped = true and save to adventureStorage and Inventory$
     // if first weapon is fork?
     return 'weapon-mock'
@@ -65,32 +84,10 @@ export class InventoryService {
   }
 
   setInventory(weapons: Weapon[]): void {
-    const newInventory = this.createInventoryObject(weapons);
+    const newInventory = this.createNewInventoryObject(weapons);
     this.Inventory$.next(newInventory);
-    this.adventureStorage.setItem(INVENTORY, JSON.stringify(newInventory));
-  }
-
-  // *** Getter ***
-
-
-
-  getItems(): Observable<Weapon[]> {
-    return this.Inventory$.pipe(
-      map(inventory => inventory.weapons)
-    );
-  }
-
-  getInventory(): Observable<Inventory> {
-    return this.Inventory$;
-  }
-
-  // is inventory initially set from user?
-  isInventorySet(): boolean {
-    if (this.adventureStorage.getItem(INVENTORY)) {
-      return true;
-    } else {
-      return false;
-    }
+    const newInventoryItem = JSON.stringify(newInventory);
+    this.adventureStorage.setItem(INVENTORY, newInventoryItem);
   }
 
   contains(name: string): Observable<boolean> {
@@ -99,15 +96,12 @@ export class InventoryService {
     );
   }
 
-  // this.Inventory$.value; 
-  // returns currently stored object in BehaviourSubject
-
   deleteItem(toBeDeletedItem: string): void {
     const filteredWeapons = this.getItems().pipe(
       map(items => items.filter(item => item.name !== toBeDeletedItem))
     );
 
-    // TODO
+    // TODO: delete from Weapon[]
     console.log('deleteItem(toBeDeletedItem: string) in inventory.service')
     this.adventureStorage.setInventory(filteredWeapons);
   }
