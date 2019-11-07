@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { InventoryService, Weapon } from '../services//inventory.service';
-import { FlagService } from'../services//flag.service';
-import { AvatarService } from '../services//avatar.service';
+import { InventoryService } from '../services/inventory.service';
+import { FlagService } from'../services/flag.service';
+import { AvatarService } from '../services/avatar.service';
+import { Weapon } from '../models/weapon.model';
 
 @Component({
   selector: 'app-welcome',

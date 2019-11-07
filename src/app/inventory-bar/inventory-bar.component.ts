@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryService, Weapon } from '../services//inventory.service';
+import { InventoryService } from '../services//inventory.service';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Weapon } from '../models/weapon.model';
 
 
 @Component({

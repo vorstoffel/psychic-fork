@@ -1,20 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-// TODO: outsource in extra file
-export interface Inventory {
-  weapons: Weapon[];
-  items?: string[];
-}
-
-// TODO: outsource in extra file
-export interface Weapon {
-  name: string;
-  strength: number;
-  equiped: boolean;
-  broken: boolean;
-}
+import { Weapon } from '../models/weapon.model';
+import { Inventory } from '../models/inventory.model';
 
 const INVENTORY = 'inventory';
 
