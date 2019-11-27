@@ -3,9 +3,9 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { LevelService } from 'src/app/services/level.service';
 
 @Component({
-  selector: 'app-level-1',
-  templateUrl: './level-1.component.html',
-  styleUrls: ['./level-1.component.scss']
+  selector: 'app-level1',
+  templateUrl: './level1.component.html',
+  styleUrls: ['./level1.component.scss']
 })
 export class Level1Component implements OnInit {
 
@@ -20,7 +20,7 @@ export class Level1Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.levelService.setLevel('level2')
+    this.levelService.setLevel('level1')
   }
 
   equipAWeapon() {

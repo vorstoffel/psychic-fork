@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LevelService } from 'src/app/services/level.service';
 
 @Component({
   selector: 'app-level2',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Level2Component implements OnInit {
 
-  constructor() { }
+  constructor(private levelService: LevelService,
+  ) { }
 
   ngOnInit() {
+    this.levelService.setLevel('level2')
   }
 
 }
