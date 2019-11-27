@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Level1Component } from './leve1.component';
+import { InventoryBarComponent } from 'src/app/inventory-bar/inventory-bar.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 describe('Level1Component', () => {
   let component: Level1Component;
@@ -8,9 +9,15 @@ describe('Level1Component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Level1Component ]
+      declarations: [
+        Level1Component,
+        InventoryBarComponent
+      ],
+      imports: [
+        MatChipsModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

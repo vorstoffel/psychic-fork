@@ -13,7 +13,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FlexLayoutModule } from "@angular/flex-layout";
-
 import { AppComponent } from './app.component';
 import { StartPlayComponent } from './start-play/start-play.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -53,7 +52,6 @@ const appRoutes: Routes = [
     FormsModule,
     FlexLayoutModule,
     MatChipsModule,
-    FormsModule,
     MatCheckboxModule,
     RouterModule.forRoot(appRoutes)
   ],

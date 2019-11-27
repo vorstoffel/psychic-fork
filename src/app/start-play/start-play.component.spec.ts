@@ -1,16 +1,29 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { StartPlayComponent } from './start-play.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 
-describe('StartPlayComponent', () => {
+@Component({
+  selector: 'test-component',
+  template: '<div>test<div>',
+})
+export class MockComponent { }
+
+fdescribe('StartPlayComponent', () => {
   let component: StartPlayComponent;
   let fixture: ComponentFixture<StartPlayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartPlayComponent ]
+      declarations: [StartPlayComponent, MockComponent],
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        MatDialogModule,
+      ],
+
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +35,6 @@ describe('StartPlayComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
 });
