@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 })
 export class MockComponent { }
 
-fdescribe('StartPlayComponent', () => {
+describe('StartPlayComponent', () => {
   let component: StartPlayComponent;
   let fixture: ComponentFixture<StartPlayComponent>;
 
@@ -36,5 +36,5 @@ fdescribe('StartPlayComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
+
 });
