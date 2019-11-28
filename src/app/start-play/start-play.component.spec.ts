@@ -2,13 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StartPlayComponent } from './start-play.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Component } from '@angular/core';
+import { MockComponent } from 'ng-mocks';
+import { Level1Component } from '../levels/level1/leve1.component';
 
-@Component({
-  selector: 'test-component',
-  template: '<div>test<div>',
-})
-export class MockComponent { }
 
 describe('StartPlayComponent', () => {
   let component: StartPlayComponent;
@@ -16,12 +12,11 @@ describe('StartPlayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [StartPlayComponent, MockComponent],
+      declarations: [StartPlayComponent, MockComponent(Level1Component)],
       imports: [
-        RouterTestingModule.withRoutes([]),
-        MatDialogModule,
-      ],
-
+        RouterTestingModule.withRoutes([{ path: 'level1', component: MockComponent(Level1Component) }]),
+        MatDialogModule
+      ]
     })
       .compileComponents();
   }));
