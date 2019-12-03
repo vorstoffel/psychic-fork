@@ -85,13 +85,13 @@ export class InventoryService {
   }
 
   deleteItem(toBeDeletedItem: string): void {
-    const filteredWeapons = this.getItems().pipe(
-      map(items => items.filter(item => item.name !== toBeDeletedItem))
-    );
+    // const filteredWeapons = this.getItems().pipe(
+    //   map(items => items.filter(item => item.name !== toBeDeletedItem))
+    // );
 
-    // TODO: delete from Weapon[]
-    console.log('deleteItem(toBeDeletedItem: string) in inventory.service')
-    this.adventureStorage.setInventory(filteredWeapons);
+    // // TODO: delete from Weapon[]
+    // console.log('deleteItem(toBeDeletedItem: string) in inventory.service')
+    // this.adventureStorage.setInventory(filteredWeapons);
   }
 
   deleteInventory(): void {

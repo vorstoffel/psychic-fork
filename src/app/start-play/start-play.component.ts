@@ -22,7 +22,7 @@ export class StartPlayComponent {
 
   playGame() {
     if (this.inventoryService.isInventorySet()) {
-      this.router.navigate([this.levelService.getLevel()]);
+      this.router.navigate([`level${this.levelService.getLevel()}`]);
     } else {
       this.emptyInventoryDialog.open(EmptyInventoryDialogComponent);
       this.startNewGameButton = true;

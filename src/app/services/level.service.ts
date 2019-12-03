@@ -8,17 +8,21 @@ const CURRENTLEVEL = 'current-level';
 export class LevelService {
   levelStorage = localStorage;
 
-  setLevel(currentLevel: string): void {
-    this.levelStorage.setItem(CURRENTLEVEL, currentLevel);
+  setLevel(currentLevel: number): void {
+    this.levelStorage.setItem(CURRENTLEVEL, currentLevel.toString());
   }
 
-  getLevel(): string {
+  getLevel(): number {
     const currentLevel = this.levelStorage.getItem(CURRENTLEVEL);
-    if(currentLevel == undefined) {
-      return 'level1';
+    if (currentLevel == undefined) {
+      return 1;
     }
     else {
-      return currentLevel;
+      return parseInt(currentLevel, 10);
     }
+  }
+
+  clear(): void {
+    this.levelStorage.removeItem(CURRENTLEVEL);
   }
 }
