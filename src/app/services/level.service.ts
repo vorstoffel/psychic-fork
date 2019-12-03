@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IStorage } from './storage.service';
 
 const CURRENTLEVEL = 'current-level';
 
@@ -6,23 +7,27 @@ const CURRENTLEVEL = 'current-level';
   providedIn: 'root'
 })
 export class LevelService {
-  levelStorage = localStorage;
+  private _storage: IStorage;
+
+  set storage(value: IStorage) {
+    this._storage = value;
+  }
+
+  get storage(): IStorage {
+    return this._storage;
+  }
 
   setLevel(currentLevel: number): void {
-    this.levelStorage.setItem(CURRENTLEVEL, currentLevel.toString());
+    this.storage.setItem(CURRENTLEVEL, currentLevel.toString());
   }
 
   getLevel(): number {
-    const currentLevel = this.levelStorage.getItem(CURRENTLEVEL);
+    const currentLevel = this.storage.getItem(CURRENTLEVEL);
     if (currentLevel == undefined) {
       return 1;
     }
     else {
       return parseInt(currentLevel, 10);
     }
-  }
-
-  clear(): void {
-    this.levelStorage.removeItem(CURRENTLEVEL);
   }
 }

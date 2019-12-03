@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +20,7 @@ import { InventoryBarComponent } from './inventory-bar/inventory-bar.component';
 import { EmptyInventoryDialogComponent } from './empty-inventory-dialog/empty-inventory-dialog.component';
 import { Level1Component } from './levels/level1/leve1.component';
 import { Level2Component } from './levels/level2/level2.component';
+import { LevelService } from './services/level.service';
 
 const appRoutes: Routes = [
   { path: '', component: StartPlayComponent },
@@ -58,7 +59,19 @@ const appRoutes: Routes = [
   entryComponents: [
     EmptyInventoryDialogComponent
   ],
-  providers: [],
+  providers: [{
+    multi: true,
+    provide: APP_INITIALIZER,
+    useFactory: initLevelService,
+    deps: [LevelService]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function initLevelService(levelService: LevelService) {
+  return () => {
+    levelService.storage = localStorage;
+    return true;
+  };
+}

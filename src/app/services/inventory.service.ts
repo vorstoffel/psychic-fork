@@ -3,6 +3,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Weapon } from '../models/weapon.model';
 import { Inventory } from '../models/inventory.model';
+import { StorageService } from './storage.service';
 
 const INVENTORY = 'inventory';
 
@@ -10,12 +11,11 @@ const INVENTORY = 'inventory';
   providedIn: 'root'
 })
 export class InventoryService {
-  private adventureStorage = localStorage;
   private Inventory$ = new ReplaySubject<Inventory>();
 
-  constructor() {
-    if (this.adventureStorage.getItem(INVENTORY)) {
-      const inventoryLocalStorage = JSON.parse(this.adventureStorage.getItem(INVENTORY))
+  constructor(private storageService: StorageService) {
+    if (this.storageService.getItem(INVENTORY)) {
+      const inventoryLocalStorage = JSON.parse(this.storageService.getItem(INVENTORY))
       this.Inventory$.next(inventoryLocalStorage);
     }
   }
@@ -23,7 +23,7 @@ export class InventoryService {
   // *** Getter ***
   
   isInventorySet(): boolean {
-    return this.adventureStorage.getItem(INVENTORY) ? true : false;
+    return this.storageService.getItem(INVENTORY) ? true : false;
   }
 
   getItems(): Observable<Weapon[]> {
@@ -63,38 +63,32 @@ export class InventoryService {
     return 'weapon-mock'
   }
 
-  addWeapon(name: string, strength: number) {
-    // TODO: add weapon to weapon[] in inventory and save it to adventureStorage
+  addWeapon(name: string, strength: number): void {
+    // TODO: add weapon to weapon[] in inventory and save it to storage
   }
 
-  addItem(name: string) {
-    // TODO: add one item to the items[] in Inventory$ and save it to adventureStorage
+  deleteWeapon(name: string): void {
+    // TODO: delete one weapon in the weapon[]
+  }
+
+  addItem(name: string): void {
+    // TODO: add one item to the items[] in Inventory$ and save it to storage
+  }
+
+  deleteIdem(name: string): void {
+    // TODO: delete one item in the item[]
   }
 
   setInventory(weapons: Weapon[]): void {
     const newInventory = this.createNewInventoryObject(weapons);
     this.Inventory$.next(newInventory);
     const newInventoryItem = JSON.stringify(newInventory);
-    this.adventureStorage.setItem(INVENTORY, newInventoryItem);
+    this.storageService.setItem(INVENTORY, newInventoryItem);
   }
 
   contains(name: string): Observable<boolean> {
     return this.getItems().pipe(
       map(items => items.findIndex((item) => item.name === name) !== -1)
     );
-  }
-
-  deleteItem(toBeDeletedItem: string): void {
-    // const filteredWeapons = this.getItems().pipe(
-    //   map(items => items.filter(item => item.name !== toBeDeletedItem))
-    // );
-
-    // // TODO: delete from Weapon[]
-    // console.log('deleteItem(toBeDeletedItem: string) in inventory.service')
-    // this.adventureStorage.setInventory(filteredWeapons);
-  }
-
-  deleteInventory(): void {
-    this.adventureStorage.clear();
   }
 }

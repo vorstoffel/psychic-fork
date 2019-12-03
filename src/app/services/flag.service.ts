@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
 
 export class Flags {
   meanie: boolean = false;
@@ -10,16 +11,17 @@ const FLAGS = 'flags';
   providedIn: 'root'
 })
 export class FlagService {
-  flagStorage = localStorage;
+
+  constructor(private storageService: StorageService) { }
 
   setMeanie(flag: boolean): void {
-    this.flagStorage.setItem(FLAGS, JSON.stringify({
+    this.storageService.setItem(FLAGS, JSON.stringify({
       meanie: flag,
     }));
   }
 
   getMeanie(): boolean {
-    const flags = JSON.parse(this.flagStorage.getItem(FLAGS));
+    const flags = JSON.parse(this.storageService.getItem(FLAGS));
     if (flags == undefined || flags.meanie == undefined) {
       return false;
     } else {

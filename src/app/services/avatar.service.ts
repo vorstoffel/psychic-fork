@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
 
 const NAME = 'avatar-name';
 
@@ -6,13 +7,14 @@ const NAME = 'avatar-name';
   providedIn: 'root'
 })
 export class AvatarService {
-  private avatarStorage = localStorage;
+
+  constructor(private storageService: StorageService) { }
 
   setName(name: string) {
-    this.avatarStorage.setItem(NAME, name);
+    this.storageService.setItem(NAME, name);
   }
 
   getName(): string {
-    return this.avatarStorage.getItem(NAME);
+    return this.storageService.getItem(NAME);
   }
 }
