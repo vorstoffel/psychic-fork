@@ -12,7 +12,7 @@ export class Level2Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.levelService.setLevel(2)
+    this.levelService.setLevel(2);
   }
 
 }

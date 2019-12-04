@@ -3,7 +3,7 @@ import { LevelService } from './level.service';
 import { InMemoryStorage } from './storage.service';
 
 
-fdescribe('LevelService', () => {
+describe('LevelService', () => {
   let levelService: LevelService;
 
   beforeEach(() => {

@@ -7,10 +7,9 @@ const NAME = 'avatar-name';
   providedIn: 'root'
 })
 export class AvatarService {
+  constructor(private storageService: StorageService) {}
 
-  constructor(private storageService: StorageService) { }
-
-  setName(name: string) {
+  setName(name: string): void {
     this.storageService.setItem(NAME, name);
   }
 

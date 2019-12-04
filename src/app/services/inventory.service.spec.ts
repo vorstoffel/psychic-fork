@@ -1,22 +1,43 @@
 import { TestBed } from '@angular/core/testing';
-
 import { InventoryService } from './inventory.service';
+import { StorageService, InMemoryStorage } from './storage.service';
+import { weaponsMock } from '../mocks/weapons-mock';
+import { inventoryMock } from '../mocks/inventory-mock';
+import { Inventory } from '../models/inventory.model';
+import { take } from 'rxjs/operators';
 
 describe('InventoryService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let inventoryService: InventoryService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: StorageService, useClass: InMemoryStorage }
+      ]
+    });
+    inventoryService = TestBed.get(InventoryService);
+  });
 
   it('should be created', () => {
-    const service: InventoryService = TestBed.get(InventoryService);
-    expect(service).toBeTruthy();
+    expect(inventoryService).toBeTruthy();
   });
 
   it('should test if inventory is set', () => {
-    // arrange/given (what setup is needed)
+    //   isInventorySet(): boolean {
 
-    // act/when (the subjets behavior that's under test)
+  });
 
-    // assert/then (the verification that the subjects 
-    // behaviour had the desired effect)
+  it('should set and get inventory "test"', async () => {
+    // arrange
+    const expectedInventory: Inventory = { ...inventoryMock };
 
+    // act
+    inventoryService.setInventory(weaponsMock);
+    const actualInventory = await inventoryService.getInventory().pipe(
+      take(1)
+    ).toPromise();
+
+    // assert
+    expect(actualInventory).toEqual(expectedInventory);
   });
 });

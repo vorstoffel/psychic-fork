@@ -20,7 +20,7 @@ export class Level1Component implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.levelService.setLevel(1)
+    this.levelService.setLevel(1);
   }
 
   equipAWeapon() {

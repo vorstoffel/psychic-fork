@@ -75,7 +75,7 @@ export class InventoryService {
     // TODO: add one item to the items[] in Inventory$ and save it to storage
   }
 
-  deleteIdem(name: string): void {
+  deleteItem(name: string): void {
     // TODO: delete one item in the item[]
   }
 

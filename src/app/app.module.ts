@@ -21,6 +21,7 @@ import { EmptyInventoryDialogComponent } from './empty-inventory-dialog/empty-in
 import { Level1Component } from './levels/level1/leve1.component';
 import { Level2Component } from './levels/level2/level2.component';
 import { LevelService } from './services/level.service';
+import { AvatarService } from './services/avatar.service';
 
 const appRoutes: Routes = [
   { path: '', component: StartPlayComponent },
@@ -32,11 +33,11 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    EmptyInventoryDialogComponent,
     WelcomeComponent,
     InventoryBarComponent,
-    Level1Component,
     StartPlayComponent,
-    EmptyInventoryDialogComponent,
+    Level1Component,
     Level2Component
   ],
   imports: [
@@ -62,14 +63,16 @@ const appRoutes: Routes = [
   providers: [{
     multi: true,
     provide: APP_INITIALIZER,
-    useFactory: initLevelService,
-    deps: [LevelService]
+    useFactory: initServices,
+    deps: [
+      LevelService,
+    ]
   }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-export function initLevelService(levelService: LevelService) {
+export function initServices(levelService: LevelService) {
   return () => {
     levelService.storage = localStorage;
     return true;
